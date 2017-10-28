@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<?php use Phalcon\Tag; ?>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Fernando Henriques">
+
+    <title>News - Dashboard</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="<?=BASE_URL?>css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="<?=BASE_URL?>css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="<?=BASE_URL?>font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	
+	<div class="container-fluid">
+		
+		<!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="" id="link-home">News</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span id="nome_usuario"></span> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#" id="logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="main-content col-lg-11">
+        	
+        	<!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Gerenciador <small></small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-home"></i> Dashboard
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+                
+		        <div class="row">
+		            <div class="col-sm-2">
+		                <button type="button" id="btn-modal-1" class="btn btn-md btn-success btn-icon icon-left" data-toggle="modal" data-target="#modal-1">
+		                    <i class="fa fa-newspaper-o"></i>
+		                    Cadastrar Notícia
+		                </button>
+		            </div>
+		            <div class="col-sm-2">
+		                <button type="button" id="btn-modal-2" class="btn btn-md btn-success btn-icon icon-left" data-toggle="modal" data-target="#modal-2">
+		                    <i class="fa fa-user"></i>
+		                    Cadastrar Usuário
+		                </button>
+		            </div>
+		        </div><br />
+				<!-- /.row -->
+				
+				<div class="row">
+			  		<div class="col-sm-12 table-responsive" id="list-news">
+			   			<!-- Conteúdo inserido via jQuery -->		   
+			  		</div>
+				</div>
+				<!-- /.row -->
+				
+        </div>
+        
+	</div>
+
+    <!-- Modal 1 (Cadastrar Notícia)-->
+    <div class="modal fade" id="modal-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Inserir Notícia</h4>
+                </div>
+                <?php echo Tag::form(array("dashboard/saveNews", "id" => "form-save-news")); ?>
+                <div class="modal-body">
+                	<div id="msg-modal-1" class="status"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Título" required>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="author" name="author" placeholder="Autor" required>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <textarea rows="10" cols="50" class="form-control" id="content" name="content" placeholder="Notícia" required></textarea>
+                            </div>
+
+                        </div>
+                    </div> 
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-info">Salvar</button>
+                </div>
+               </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal 2 (Cadastrar Usuário)-->
+    <div class="modal fade" id="modal-2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Inserir Usuário</h4>
+                </div>
+                <?php echo Tag::form(array("signup/register", "id" => "form-new-user")); ?>
+                <?php echo Tag::hiddenField(array("active", "value" => "N")) ?>
+                
+                <div class="modal-body">
+                	<div id="msg-modal-2" class="status"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Nome" required>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Senha" required>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-info">Salvar</button>
+                </div>
+               </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="<?=BASE_URL?>js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?=BASE_URL?>js/bootstrap.min.js"></script>
+    <!-- Custom JSs -->
+    <script src="<?=BASE_URL?>js/for.all.js"></script>
+    <script src="<?=BASE_URL?>js/dashboard.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<?php use Phalcon\Tag; ?>
+
+<h2>Sign up using this form</h2>
+
+<?php echo Tag::form("signup/register"); ?>
+
+ <?php echo Tag::hiddenField(array("active", "value" => "N")) ?>
+
+ <p>
+    <label for="name">Name</label>
+    <?php echo Tag::textField("name") ?>
+ </p>
+
+ <p>
+    <label for="email">E-Mail</label>
+    <?php echo Tag::textField("email") ?>
+ </p>
+
+ <p>
+    <label for="email">Senha</label>
+    <?php echo Tag::textField("password") ?>
+ </p>
+
+ <p>
+    <?php echo Tag::submitButton("Register") ?>
+ </p>
+
+</form>
