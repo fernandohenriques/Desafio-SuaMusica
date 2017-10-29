@@ -35,7 +35,7 @@ class DashboardController extends \Phalcon\Mvc\Controller {
     foreach ($news as $new) {
     		$data[] = array(
         		'id'       => $new->id,
-            'title'    => $new->title,
+            'title'    => utf8_encode($new->title),
             'author'   => $new->author,
             'content'  => $new->content
         );
